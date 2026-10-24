@@ -97,7 +97,7 @@ class Main {
 
             // If the the user has entered the maximum amount of grades, exit.
             if (count >= MAX_COUNT) {
-                System.err.println("Maximum number of grades entered. Exit.");
+                System.err.println("Maximum number of grades entered.");
                 break;
             }
         }
@@ -109,11 +109,13 @@ class Main {
      * Prints all grades in the array.
      */
     private static void printGrades() {
-        System.out.println("Summary of the list of grades:");
+        if (count > 0) {
+            System.out.println("Summary of the list of grades:");
 
-        // Cycle through the array of grades and print them one by one.
-        for (int grade : grades) {
-            System.out.println(grade);
+            // Cycle through the array of grades and print them one by one.
+            for (int i = 0; i < count; i++) {
+                System.out.println(grades[i]);
+            }
         }
     }
 
@@ -121,38 +123,42 @@ class Main {
      * Computes the average quiz grade.
      */
     private static void computeAverageGrade() {
-        int sum = 0;
+        if (count > 0) {
+            int sum = 0;
 
-        // Cumulates the sum of the grades
-        for (int grade : grades) {
-            sum += grade;
+            // Cumulates the sum of the grades
+            for (int i = 0; i < count; i++) {
+                sum += grades[i];
+            }
+
+            // Calculate the average
+            average = (float) sum / count;
+
+            System.out.println("Average quiz grade: " + average);
         }
-
-        // Calculate the average
-        average = (float) sum / count;
-
-        System.out.println("Average quiz grade: " + average);
     }
 
     /**
      * Find out the letter grade of the average based on grading scale.
      */
     private static void parseLetterGrade() {
-        char letterGrade;
+        if (count > 0) {
+            char letterGrade;
 
-        // Finds the appropriate letter for the average grade.
-        if (average >= 90) {
-            letterGrade = 'A';
-        } else if (average >= 80) {
-            letterGrade = 'B';
-        } else if (average >= 70) {
-            letterGrade = 'C';
-        } else if (average >= 60) {
-            letterGrade = 'D';
-        } else {
-            letterGrade = 'F';
+            // Finds the appropriate letter for the average grade.
+            if (average >= 90) {
+                letterGrade = 'A';
+            } else if (average >= 80) {
+                letterGrade = 'B';
+            } else if (average >= 70) {
+                letterGrade = 'C';
+            } else if (average >= 60) {
+                letterGrade = 'D';
+            } else {
+                letterGrade = 'F';
+            }
+
+            System.out.println("Letter grade: " + letterGrade);
         }
-
-        System.out.println("Letter grade: " + letterGrade);
     }
 }
