@@ -4,32 +4,26 @@ class Main {
     private static final int MAX_COUNT = 10;
     private static int[] grades = new int[MAX_COUNT]; // Stores the grades
     private static int count = 0; // Keeps track of the number of grades
+    private static int sum = 0; // Stores the sum of the grades
     private static float average = 0; // Stores the average grade
     
     public static void main(String[] args) {
         // If no args provided, display basic help message
         if (args.length == 0) {
-            System.out.println("No arguments provided.");
-            System.out.println("\tUse -s or --specs to display the project specifications.");
-            System.out.println("\tUse -i or --input to enter grades.");
+            getGradesFromInput();
+            printGrades();
+            computeAverageGrade();
+            parseLetterGrade();
         }
 
         for (String arg : args) {
             // Look for -s or --specs to display the project specs
             if (arg.equals("-s") || arg.equals("--specs")) {
                 printProgrammingSpecs();
-                return;
-            }
-
-            // Option -i or --input for entering grades. Ends when user enters 999 or after 10 grades.
-            if (arg.equals("-i") || arg.equals("--input")) {
-                getGradesFromInput();
-                printGrades();
-                computeAverageGrade();
-                parseLetterGrade();
-                return;
             }
         }
+
+        return;
     }
 
     /**
@@ -87,9 +81,10 @@ class Main {
                 break;
             }
 
-            // If grade is valid, add it to the array and increment the counter
+            // If grade is valid, add it to the array and increment the counter. Also update the grades sum for later average calculation.
             if (grade >= 0 && grade <= 100) {
                 grades[count] = grade;
+                sum += grade;
                 count++;
             } else {
                 System.err.println("Invalid grade: " + grade + ". Ignored.");
@@ -124,13 +119,6 @@ class Main {
      */
     private static void computeAverageGrade() {
         if (count > 0) {
-            int sum = 0;
-
-            // Cumulates the sum of the grades
-            for (int i = 0; i < count; i++) {
-                sum += grades[i];
-            }
-
             // Calculate the average
             average = (float) sum / count;
 
