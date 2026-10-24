@@ -61,6 +61,7 @@ class Main {
         while (input.hasNext()) {
             int grade;
 
+            // Try to get the grade input from the user. If the value is anything else than an integer, ignore and go to the next input.
             try {
                 grade = input.nextInt();
             } catch (java.util.InputMismatchException e) {
@@ -69,6 +70,7 @@ class Main {
                 continue;
             }
 
+            // Exit door
             if (grade == 999) {
                 break;
             }
