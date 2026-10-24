@@ -102,6 +102,9 @@ class Main {
         input.close();
     }
     
+    /**
+     * Prints all grades in the array.
+     */
     private static void printGrades() {
         System.out.println("Summary of the list of grades:");
 
