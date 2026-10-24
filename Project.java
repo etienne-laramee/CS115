@@ -4,6 +4,7 @@ class Main {
     private static final int MAX_COUNT = 10;
     private static int[] grades = new int[MAX_COUNT]; // Stores the grades
     private static int count = 0; // Keeps track of the number of grades
+    private static float average = 0; // Stores the average grade
     
     public static void main(String[] args) {
         // If no args provided, display basic help message
@@ -25,6 +26,7 @@ class Main {
                 getGradesFromInput();
                 printGrades();
                 computeAverageGrade();
+                parseLetterGrade();
                 return;
             }
         }
@@ -127,8 +129,30 @@ class Main {
         }
 
         // Calculate the average
-        float average = (float) sum / count;
+        average = (float) sum / count;
 
         System.out.println("Average quiz grade: " + average);
+    }
+
+    /**
+     * Find out the letter grade of the average based on grading scale.
+     */
+    private static void parseLetterGrade() {
+        char letterGrade;
+
+        // Finds the appropriate letter for the average grade.
+        if (average >= 90) {
+            letterGrade = 'A';
+        } else if (average >= 80) {
+            letterGrade = 'B';
+        } else if (average >= 70) {
+            letterGrade = 'C';
+        } else if (average >= 60) {
+            letterGrade = 'D';
+        } else {
+            letterGrade = 'F';
+        }
+
+        System.out.println("Letter grade: " + letterGrade);
     }
 }
