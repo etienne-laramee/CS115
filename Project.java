@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 class Main {
     private static final int MAX_COUNT = 10;
-    private static int[] grades = new int[MAX_COUNT];
-    private static int count = 0;
+    private static int[] grades = new int[MAX_COUNT]; // Stores the grades
+    private static int count = 0; // Keeps track of the number of grades
     
     public static void main(String[] args) {
         // If no args provided, display basic help message
@@ -24,6 +24,7 @@ class Main {
             if (arg.equals("-i") || arg.equals("--input")) {
                 getGradesFromInput();
                 printGrades();
+                computeAverageGrade();
                 return;
             }
         }
@@ -55,7 +56,7 @@ class Main {
     }
     
     /**
-     * Use a loop to allow the user to enter grades one after the other. Exits on value "999"
+     * Uses a loop to allow the user to enter grades one after the other. Exits on value "999".
      */
     private static void getGradesFromInput() {
         grades = new int[MAX_COUNT];
@@ -112,6 +113,22 @@ class Main {
         for (int grade : grades) {
             System.out.println(grade);
         }
+    }
 
+    /**
+     * Computes the average quiz grade.
+     */
+    private static void computeAverageGrade() {
+        int sum = 0;
+
+        // Cumulates the sum of the grades
+        for (int grade : grades) {
+            sum += grade;
+        }
+
+        // Calculate the average
+        float average = (float) sum / count;
+
+        System.out.println("Average quiz grade: " + average);
     }
 }
