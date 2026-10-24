@@ -51,12 +51,16 @@ class Main {
     /**
      * Use a loop to allow the user to enter grades one after the other. Exits on value "999"
      */
-    public static void getGradesFromInput() {
+    private static void getGradesFromInput() {
+        final int MAX_COUNT = 10;
+        int[] grades = new int[MAX_COUNT];
+        int count = 0;
+
         Scanner input = new java.util.Scanner(System.in);
 
         // Instruct the user to enter grades
         System.out
-                .println("Enter a grade value and then press enter to add a new one. Enter the value \"999\" to exit");
+                .println("Enter a grade value between 0 and 100 and then press enter to add a new one. Enter the value \"999\" to exit");
         
         while (input.hasNext()) {
             int grade;
@@ -65,13 +69,26 @@ class Main {
             try {
                 grade = input.nextInt();
             } catch (java.util.InputMismatchException e) {
-                System.err.println("Invalid input. Ignored.");
-                input.next();
+                System.err.println("Invalid input: " + input.next() + ". Ignored.");
                 continue;
             }
-
+            
             // Exit door
             if (grade == 999) {
+                break;
+            }
+
+            // If grade is valid, add it to the array and increment the counter
+            if (grade >= 0 && grade <= 100) {
+                grades[count] = grade;
+                count++;
+            } else {
+                System.err.println("Invalid grade: " + grade + ". Ignored.");
+            }
+
+            // If the the user has entered the maximum amount of grades, exit.
+            if (count >= MAX_COUNT) {
+                System.err.println("Maximum number of grades entered. Exit.");
                 break;
             }
         }
