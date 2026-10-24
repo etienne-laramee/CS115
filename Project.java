@@ -6,9 +6,9 @@ class Main {
     private static int count = 0; // Keeps track of the number of grades
     private static int sum = 0; // Stores the sum of the grades
     private static float average = 0; // Stores the average grade
-    
+
     public static void main(String[] args) {
-        // If no args provided, display basic help message
+        // If no args provided, run the happy flow
         if (args.length == 0) {
             getGradesFromInput();
             printGrades();
@@ -50,9 +50,10 @@ class Main {
 
         System.out.println(specs);
     }
-    
+
     /**
-     * Uses a loop to allow the user to enter grades one after the other. Exits on value "999".
+     * Uses a loop to allow the user to enter grades one after the other. Exits on
+     * value "999".
      */
     private static void getGradesFromInput() {
         grades = new int[MAX_COUNT];
@@ -68,7 +69,8 @@ class Main {
         while (input.hasNext()) {
             int grade;
 
-            // Try to get the grade input from the user. If the value is anything else than an integer, ignore and go to the next input.
+            // Try to get the grade input from the user. If the value is anything else than
+            // an integer, ignore and go to the next input.
             try {
                 grade = input.nextInt();
             } catch (java.util.InputMismatchException e) {
@@ -81,7 +83,8 @@ class Main {
                 break;
             }
 
-            // If grade is valid, add it to the array and increment the counter. Also update the grades sum for later average calculation.
+            // If grade is valid, add it to the array and increment the counter. Also update
+            // the grades sum for later average calculation.
             if (grade >= 0 && grade <= 100) {
                 grades[count] = grade;
                 sum += grade;
@@ -99,7 +102,7 @@ class Main {
 
         input.close();
     }
-    
+
     /**
      * Prints all grades in the array.
      */
