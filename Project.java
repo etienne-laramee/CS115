@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
 class Main {
+    private static final int MAX_COUNT = 10;
+    private static int[] grades = new int[MAX_COUNT];
+    private static int count = 0;
+    
     public static void main(String[] args) {
+        // If no args provided, display basic help message
         if (args.length == 0) {
             System.out.println("No arguments provided.");
             System.out.println("\tUse -s or --specs to display the project specifications.");
@@ -9,7 +14,7 @@ class Main {
         }
 
         for (String arg : args) {
-            // Look for -s or --specs
+            // Look for -s or --specs to display the project specs
             if (arg.equals("-s") || arg.equals("--specs")) {
                 printProgrammingSpecs();
                 return;
@@ -18,6 +23,7 @@ class Main {
             // Option -i or --input for entering grades. Ends when user enters 999 or after 10 grades.
             if (arg.equals("-i") || arg.equals("--input")) {
                 getGradesFromInput();
+                printGrades();
                 return;
             }
         }
@@ -52,16 +58,16 @@ class Main {
      * Use a loop to allow the user to enter grades one after the other. Exits on value "999"
      */
     private static void getGradesFromInput() {
-        final int MAX_COUNT = 10;
-        int[] grades = new int[MAX_COUNT];
-        int count = 0;
+        grades = new int[MAX_COUNT];
+        count = 0;
 
         Scanner input = new java.util.Scanner(System.in);
 
         // Instruct the user to enter grades
         System.out
-                .println("Enter a grade value between 0 and 100 and then press enter to add a new one. Enter the value \"999\" to exit");
-        
+                .println(
+                        "Enter a grade value between 0 and 100 and then press enter to add a new one. Enter the value \"999\" to exit");
+
         while (input.hasNext()) {
             int grade;
 
@@ -72,7 +78,7 @@ class Main {
                 System.err.println("Invalid input: " + input.next() + ". Ignored.");
                 continue;
             }
-            
+
             // Exit door
             if (grade == 999) {
                 break;
@@ -94,5 +100,15 @@ class Main {
         }
 
         input.close();
+    }
+    
+    private static void printGrades() {
+        System.out.println("Summary of the list of grades:");
+
+        // Cycle through the array of grades and print them one by one.
+        for (int grade : grades) {
+            System.out.println(grade);
+        }
+
     }
 }
